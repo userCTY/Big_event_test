@@ -109,6 +109,7 @@ $(function () {
     //功能4 删除文章操作
     $('tbody').on('click', '.btn_delete', function () {
         let id = $(this).data('id')
+        let len = $('.btn_delete').length
         layer.confirm('确认删除文章?', { icon: 3, title: '提示' }, function (index) {
             //do something
             $.ajax({
@@ -119,6 +120,9 @@ $(function () {
                         return layer.msg('删除文章失败!')
                     }
                     layer.msg('删除文章成功!')
+                    if (len === 1) {
+                        q.pagenum = q.pagenum == 1 ? 1 : q.pagenum - 1
+                    }
                     getData()
                 }
             })
